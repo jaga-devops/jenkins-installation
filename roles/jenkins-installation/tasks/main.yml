@@ -1,0 +1,29 @@
+---
+# tasks file for jenkins-installation
+- name: Update all packages to their latest version
+  apt:
+    update_cache: yes
+    force_apt_get: yes
+- name: Installing the java version8
+  apt:
+    name: '{{ JDK_version  }}'
+- name: get apt repo key
+  apt_key:
+    url: '{{ jenkins_public_signing_key }}'
+    state: present
+- name: Add jenkins repository
+  apt_repository:
+    repo: '{{ Jenkins_apt_repository }}'
+- name: Update all packages to their latest version
+  apt:
+    update_cache: yes
+    force_apt_get: yes
+- name: install jenkins
+  apt:
+    name: jenkins
+- name: Return Administrator password to registered var
+  command: cat /var/lib/jenkins/secrets/initialAdminPassword
+  register: Administrator_password
+- name: Below is the Administrator password
+  debug:
+    var: Administrator_password.stdout_lines[0]

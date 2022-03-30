@@ -1,0 +1,5 @@
+---
+# defaults file for jenkins-installation
+JDK_version: openjdk-8-jdk
+jenkins_public_signing_key: https://pkg.jenkins.io/debian-stable/jenkins.io.key
+Jenkins_apt_repository: deb https://pkg.jenkins.io/debian-stable binary/
